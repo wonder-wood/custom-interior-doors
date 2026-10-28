@@ -1,0 +1,9 @@
+document.getElementById("menu").onclick=()=>document.getElementById("nav").classList.toggle("open");
+let slides=[...document.querySelectorAll(".slide")],dots=document.getElementById("dots"),i=0;
+slides.forEach((_,n)=>{let b=document.createElement("button");b.onclick=()=>show(n);dots.appendChild(b)});
+function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle("active",j===i));[...dots.children].forEach((b,j)=>b.classList.toggle("active",j===i))}
+document.getElementById("prev").onclick=()=>show(i-1);document.getElementById("next").onclick=()=>show(i+1);show(0);
+document.querySelectorAll(".switch:not(.side) button").forEach(b=>b.onclick=()=>{document.getElementById("tryImg").src=b.dataset.img;document.querySelectorAll(".switch:not(.side) button").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+let sm={hall:"assets/taupe.jpg",room:"assets/white.jpg"};document.querySelectorAll(".side button").forEach(b=>b.onclick=()=>{document.getElementById("sideImg").src=sm[b.dataset.side];document.querySelectorAll(".side button").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+let files=["hero.jpg","wood.jpg","taupe.jpg","olive.jpg","graphite.jpg","white.jpg","detail1.jpg","detail2.jpg","detail3.jpg","workshop.jpg","wood.jpg","olive.jpg","taupe.jpg","detail2.jpg","graphite.jpg","white.jpg","detail1.jpg","hero.jpg"];let gt=document.getElementById("galleryTrack");files.forEach((f,n)=>{let im=document.createElement("img");im.src="assets/"+f;im.alt="Gallery "+(n+1);gt.appendChild(im)});document.getElementById("gp").onclick=()=>gt.scrollBy({left:-gt.clientWidth*.8,behavior:"smooth"});document.getElementById("gn").onclick=()=>gt.scrollBy({left:gt.clientWidth*.8,behavior:"smooth"});
+document.getElementById("form").onsubmit=e=>{e.preventDefault();document.getElementById("status").textContent="Form UI ready — connect the submission service before launch."};
