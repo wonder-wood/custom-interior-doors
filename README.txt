@@ -1,1 +1,1 @@
-Open index.html to preview. Replace placeholder phone and connect a form service before launch. Images are intentionally easy to swap in /assets. The gallery currently supports 18 items and can be extended by adding filenames to the gallery array in script.js.
+Wonder Wood V2. Replace placeholder phone and connect form backend before launch. Mobile/Fold use touch swipe; desktop has controlled viewport/layout. Hero assets switch via <picture>.
