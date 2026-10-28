@@ -1,68 +1,9 @@
-(() => {
-  const modal = document.getElementById("contactModal");
-  if (!modal) return;
-  const form = document.getElementById("leadForm");
-  const note = document.getElementById("formNote");
-
-  const openModal = (e) => {
-    e.preventDefault();
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden","false");
-    document.body.style.overflow = "hidden";
-    setTimeout(() => modal.querySelector("input")?.focus(), 40);
-  };
-
-  const closeModal = () => {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden","true");
-    document.body.style.overflow = "";
-  };
-
-  document.querySelectorAll(".jstalk").forEach(el => el.addEventListener("click", openModal));
-  modal.querySelectorAll("[data-close-modal]").forEach(el => el.addEventListener("click", closeModal));
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
-  });
-
-  form?.addEventListener("submit", e => {
-    e.preventDefault();
-    note.textContent = "The form is working visually. Next we’ll connect it to your email.";
-    note.style.color = "#c29a34";
-  });
-})();
-
-// Very subtle page-wide data-thread reveal.
-(() => {
-  const thread = document.querySelector(".gold-thread");
-  if (!thread) return;
-  const updateThread = () => {
-    const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-    const p = Math.min(1, Math.max(0, scrollY / max));
-    thread.style.setProperty("--scroll-progress", p.toFixed(3));
-    thread.style.opacity = String(0.72 + p * 0.28);
-  };
-  updateThread();
-  addEventListener("scroll", updateThread, { passive:true });
-})();
-
-(() => {
- const cards=document.querySelectorAll(".interactive-step-disabled");
- const toggle=card=>{const open=card.classList.toggle("is-open");card.setAttribute("aria-expanded",String(open));};
- cards.forEach(card=>{card.addEventListener("click",()=>toggle(card));card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle(card);}});});
- const items=document.querySelectorAll(".reveal-card,.reveal-left");
- if("IntersectionObserver" in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in-view");o.unobserve(e.target);}}),{threshold:.12});items.forEach(x=>o.observe(x));}else items.forEach(x=>x.classList.add("in-view"));
-})();
-
-(() => {
- const cards=document.querySelectorAll(".flip-step");
- const toggle=card=>{
-   const open=card.classList.toggle("is-flipped");
-   card.setAttribute("aria-expanded",String(open));
- };
- cards.forEach(card=>{
-   card.addEventListener("click",()=>toggle(card));
-   card.addEventListener("keydown",e=>{
-     if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle(card);}
-   });
- });
-})();
+document.getElementById("menu").onclick=()=>document.getElementById("nav").classList.toggle("open");
+let slides=[...document.querySelectorAll(".slide")],dots=document.getElementById("dots"),i=0;
+slides.forEach((_,n)=>{let b=document.createElement("button");b.onclick=()=>show(n);dots.appendChild(b)});
+function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle("active",j===i));[...dots.children].forEach((b,j)=>b.classList.toggle("active",j===i))}
+document.getElementById("prev").onclick=()=>show(i-1);document.getElementById("next").onclick=()=>show(i+1);show(0);
+document.querySelectorAll(".switch:not(.side) button").forEach(b=>b.onclick=()=>{document.getElementById("tryImg").src=b.dataset.img;document.querySelectorAll(".switch:not(.side) button").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+let sm={hall:"assets/taupe.jpg",room:"assets/white.jpg"};document.querySelectorAll(".side button").forEach(b=>b.onclick=()=>{document.getElementById("sideImg").src=sm[b.dataset.side];document.querySelectorAll(".side button").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+let files=["hero.jpg","wood.jpg","taupe.jpg","olive.jpg","graphite.jpg","white.jpg","detail1.jpg","detail2.jpg","detail3.jpg","workshop.jpg","wood.jpg","olive.jpg","taupe.jpg","detail2.jpg","graphite.jpg","white.jpg","detail1.jpg","hero.jpg"];let gt=document.getElementById("galleryTrack");files.forEach((f,n)=>{let im=document.createElement("img");im.src="assets/"+f;im.alt="Gallery "+(n+1);gt.appendChild(im)});document.getElementById("gp").onclick=()=>gt.scrollBy({left:-gt.clientWidth*.8,behavior:"smooth"});document.getElementById("gn").onclick=()=>gt.scrollBy({left:gt.clientWidth*.8,behavior:"smooth"});
+document.getElementById("form").onsubmit=e=>{e.preventDefault();document.getElementById("status").textContent="Form UI ready — connect the submission service before launch."};
