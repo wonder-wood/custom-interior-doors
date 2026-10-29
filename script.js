@@ -5,13 +5,14 @@ let fs=["hero-phone.png","wood.png","taupe.png","olive.png","graphite.png","whit
 document.getElementById("form").onsubmit=e=>{e.preventDefault();document.getElementById("status").textContent="Form UI ready. Submission service will be connected before launch."};
 let q=document.getElementById("quote"),s=document.querySelector(".sticky");new IntersectionObserver(es=>es.forEach(e=>s.classList.toggle("hide",e.isIntersecting)),{threshold:.15}).observe(q);
 const doorDesigns = [
-  "navy-gold.png",
-  "natural-wood.png",
-  "olive-medallion.png",
-  "ivory-silver.png",
-  "navy-circle.png",
-  "taupe-oval.png",
-  "olive-circle.png",
-  "white-oval.jpg",
-  "taupe-gold.png"
+  "carousel/navy-gold.png",
+  "carousel/natural-wood.png",
+  "carousel/white-circle.png",
+  "carousel/olive-medallion.png",
+  "carousel/ivory-silver.png",
+  "carousel/navy-circle.png",
+  "carousel/taupe-oval-fixed.png",
+  "carousel/olive-circle.png",
+  "carousel/white-oval.jpg",
+  "carousel/taupe-gold.png"
 ];const dc=document.getElementById("doorCarousel");if(dc){const all=[...doorDesigns,...doorDesigns,...doorDesigns];all.forEach((f,i)=>{let d=document.createElement("div");d.className="door-card";let im=document.createElement("img");im.src="assets/"+f;im.alt="Custom interior door design "+(i%doorDesigns.length+1);d.appendChild(im);dc.appendChild(d)});let cards=()=>[...dc.children],step=()=>cards()[1].offsetLeft-cards()[0].offsetLeft,mid=()=>cards()[doorDesigns.length].offsetLeft;requestAnimationFrame(()=>dc.scrollLeft=mid());dc.addEventListener("scroll",()=>{let w=step()*doorDesigns.length,m=mid();if(dc.scrollLeft<m-w*.55)dc.scrollLeft+=w;else if(dc.scrollLeft>m+w*.55)dc.scrollLeft-=w},{passive:true});let move=x=>dc.scrollBy({left:x*step(),behavior:"smooth"});document.querySelector(".door-prev")?.addEventListener("click",()=>move(-1));document.querySelector(".door-next")?.addEventListener("click",()=>move(1));let down=false,x0=0,s0=0;dc.addEventListener("pointerdown",e=>{if(innerWidth>=1000){down=true;x0=e.clientX;s0=dc.scrollLeft;dc.setPointerCapture(e.pointerId)}});dc.addEventListener("pointermove",e=>{if(down)dc.scrollLeft=s0-(e.clientX-x0)});["pointerup","pointercancel","pointerleave"].forEach(ev=>dc.addEventListener(ev,()=>down=false))}

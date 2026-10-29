@@ -21,3 +21,23 @@
   .door-card{flex:0 0 calc((100% - 54px)/4);height:min(61vh,610px)}
   .door-arrow{display:grid!important}
 }
+
+/* V4 carousel final sizing */
+.door-card img{width:100%;height:100%;object-fit:contain}
+@media(max-width:599px){
+  .door-carousel{gap:10px;padding-left:0;padding-right:11vw}
+  .door-card{flex:0 0 calc((100% - 10px)/1.9);height:auto;aspect-ratio:2/3}
+  .door-arrow{display:none!important}
+}
+@media(min-width:600px) and (max-width:999px){
+  .door-carousel{gap:12px;padding-left:0;padding-right:8vw}
+  .door-card{flex:0 0 calc((100% - 24px)/2.5);height:auto;aspect-ratio:2/3}
+  .door-arrow{display:none!important}
+}
+@media(min-width:1000px){
+  .door-carousel-shell{padding:0 52px}
+  .door-carousel{gap:18px;padding:0;overflow:hidden}
+  .door-card{flex:0 0 calc((100% - 54px)/4);height:auto;aspect-ratio:2/3}
+  .door-arrow{display:grid!important}
+  .door-prev{left:0}.door-next{right:0}
+}
